@@ -1,4 +1,4 @@
-package com.iceq.springdata.app;
+package com.iceq.test.config;
 
 import org.neo4j.ogm.session.SessionFactory;
 import org.springframework.context.annotation.Bean;
@@ -8,14 +8,13 @@ import org.springframework.data.neo4j.transaction.Neo4jTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableNeo4jRepositories("com.iceq.springdata.repository")
+@EnableNeo4jRepositories("com.iceq.test.repository")
 @EnableTransactionManagement
 public class JavaConfig {
 
 	@Bean
 	public SessionFactory sessionFactory() {
-		// with domain entity base package(s)
-		return new SessionFactory("com.iceq.springdata.model");
+		return new SessionFactory("com.iceq.test.model");
 	}
 
 	@Bean

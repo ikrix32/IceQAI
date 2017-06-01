@@ -5,7 +5,7 @@ import com.iceq.dictionary.Grammar.Case;
 import com.iceq.dictionary.Grammar.Gender;
 import com.iceq.dictionary.Grammar.Number;;
 
-public class Substantive extends ParteDeVorbire
+public class Substantive extends PartOfSpeech
 {	
 	public class Declination extends StringN
 	{

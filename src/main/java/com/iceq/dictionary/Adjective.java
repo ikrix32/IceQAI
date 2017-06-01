@@ -3,7 +3,7 @@ package com.iceq.dictionary;
 import com.iceq.dictionary.Grammar.Gender;
 import com.iceq.dictionary.Grammar.Number;
 
-public class Adjective extends ParteDeVorbire
+public class Adjective extends PartOfSpeech
 {
 	public class Declination extends StringN
 	{

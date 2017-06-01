@@ -3,24 +3,14 @@ package com.iceq.dictionary;
 import com.iceq.dictionary.Grammar.Case;
 import com.iceq.dictionary.Grammar.Gender;
 import com.iceq.dictionary.Grammar.Number;
-import com.iceq.dictionary.Grammar.Person;
 
-public class Pronoun extends PartOfSpeech{
-	public Person m_person;
+public class Article extends PartOfSpeech{
 	public Gender m_gender;
 	public Number m_number;
 	public Case	  m_case;
 	
-	public Pronoun() {
-		super(Type.Pronoun);
-	}
-	
-	public Person getPerson() {
-		return m_person;
-	}
-
-	public void setPerson(Person m_person) {
-		this.m_person = m_person;
+	public Article() {
+		super(Type.Article);
 	}
 
 	public Gender getGender() {
@@ -50,7 +40,7 @@ public class Pronoun extends PartOfSpeech{
 	public String toString(){
 		String s = super.toString();
 		
-		s += "["+m_person+","+m_gender+","+m_number+","+m_case+"] -> ";
+		s += "["+m_gender+","+m_number+","+m_case+"] -> ";
 		
 		return s;
 	}

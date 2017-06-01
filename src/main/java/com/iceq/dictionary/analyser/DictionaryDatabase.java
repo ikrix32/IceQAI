@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.iceq.dictionary.Adjective;
+import com.iceq.dictionary.Article;
 import com.iceq.dictionary.Grammar.Art;
 import com.iceq.dictionary.Grammar.Case;
 import com.iceq.dictionary.Grammar.Gender;
@@ -12,8 +13,8 @@ import com.iceq.dictionary.Grammar.Mood;
 import com.iceq.dictionary.Grammar.Number;
 import com.iceq.dictionary.Grammar.Person;
 import com.iceq.dictionary.Grammar.Tense;
-import com.iceq.dictionary.ParteDeVorbire;
-import com.iceq.dictionary.ParteDeVorbire.Type;
+import com.iceq.dictionary.PartOfSpeech;
+import com.iceq.dictionary.PartOfSpeech.Type;
 import com.iceq.dictionary.Pronoun;
 import com.iceq.dictionary.Substantive;
 import com.iceq.dictionary.Verb;
@@ -117,7 +118,8 @@ public class DictionaryDatabase
 							+	"where (d.declination='#VALUE#' or d.declination_ascii='#VALUE#') and a.id = d.adjective_id";
 
 	public List<Adjective> getAdjective(String text){
-		ResultSet resultSet = driver.runQuery(ADJECTIVE_QUERY.replace(TAG_VALUE, text));
+		String query  = ADJECTIVE_QUERY.replace(TAG_VALUE, text);
+		ResultSet resultSet = driver.runQuery(query);
 		
 		List<Adjective> adjectives = new ArrayList<Adjective>();
 		
@@ -152,16 +154,16 @@ public class DictionaryDatabase
 	}
 	
 	final static String ADVERBS_QUERY = "select * from adverbs where adverb='#VALUE#' or adverb_ascii='#VALUE#'"; 
-	public List<ParteDeVorbire> getAdverb(String text)
+	public List<PartOfSpeech> getAdverb(String text)
 	{
 		ResultSet resultSet = driver.runQuery(ADVERBS_QUERY.replace(TAG_VALUE, text));
 		
-		List<ParteDeVorbire> adverbs = new ArrayList<ParteDeVorbire>();
+		List<PartOfSpeech> adverbs = new ArrayList<PartOfSpeech>();
 		if(resultSet != null ){
 			try{
 				while(resultSet.next()){
 					String adverbTxt = resultSet.getString("adverb");
-					ParteDeVorbire adverb = null;
+					PartOfSpeech adverb = null;
 					for(int i = 0; i < adverbs.size() && adverb == null;i++){
 						if(adverbTxt.equals(adverbs.get(i).m_value)){
 							adverb = adverbs.get(i);
@@ -169,7 +171,7 @@ public class DictionaryDatabase
 					}
 					
 					if(adverb == null){
-						adverb = new ParteDeVorbire(Type.Adverb);
+						adverb = new PartOfSpeech(Type.Adverb);
 						adverb.set(adverbTxt);
 						adverbs.add(adverb);
 					}
@@ -222,16 +224,16 @@ public class DictionaryDatabase
 	}
 	
 	final static String PREPOSITIONS_QUERY = "select * from prepositions where preposition= '#VALUE#' or preposition_ascii= '#VALUE#'"; 
-	public List<ParteDeVorbire> getPreposition(String text)
+	public List<PartOfSpeech> getPreposition(String text)
 	{
 		ResultSet resultSet = driver.runQuery(PREPOSITIONS_QUERY.replace(TAG_VALUE, text));
 		
-		List<ParteDeVorbire> prepositions = new ArrayList<ParteDeVorbire>();
+		List<PartOfSpeech> prepositions = new ArrayList<PartOfSpeech>();
 		if(resultSet != null ){
 			try{
 				while(resultSet.next()){
 					String prepositionTxt = resultSet.getString("preposition");
-					ParteDeVorbire preposition = null;
+					PartOfSpeech preposition = null;
 					for(int i = 0; i < prepositions.size() && preposition == null;i++){
 						if(prepositionTxt.equals(prepositions.get(i).m_value)){
 							preposition = prepositions.get(i);
@@ -239,7 +241,7 @@ public class DictionaryDatabase
 					}
 					
 					if(preposition == null){
-						preposition = new ParteDeVorbire(Type.Preposition);
+						preposition = new PartOfSpeech(Type.Preposition);
 						preposition.set(prepositionTxt);
 						prepositions.add(preposition);
 					}
@@ -253,16 +255,16 @@ public class DictionaryDatabase
 	}
 	
 	final static String NUMERALS_QUERY = "select * from numerals where numeral='#VALUE#' or numeral_ascii='#VALUE#'"; 
-	public List<ParteDeVorbire> getNumeral(String text)
+	public List<PartOfSpeech> getNumeral(String text)
 	{
 		ResultSet resultSet = driver.runQuery(NUMERALS_QUERY.replace(TAG_VALUE, text));
 		
-		List<ParteDeVorbire> numerals = new ArrayList<ParteDeVorbire>();
+		List<PartOfSpeech> numerals = new ArrayList<PartOfSpeech>();
 		if(resultSet != null ){
 			try{
 				while(resultSet.next()){
 					String numeralTxt = resultSet.getString("numeral");
-					ParteDeVorbire numeral = null;
+					PartOfSpeech numeral = null;
 					for(int i = 0; i < numerals.size() && numeral == null;i++){
 						if(numeralTxt.equals(numerals.get(i).m_value)){
 							numeral = numerals.get(i);
@@ -270,7 +272,7 @@ public class DictionaryDatabase
 					}
 					
 					if(numeral == null){
-						numeral = new ParteDeVorbire(Type.Numeral);
+						numeral = new PartOfSpeech(Type.Numeral);
 						numeral.set(numeralTxt);
 						numerals.add(numeral);
 					}
@@ -284,16 +286,16 @@ public class DictionaryDatabase
 	}
 
 	final static String CONJUNCTIONS_QUERY = "select * from conjunctions where conjunction='#VALUE#' or conjunction_ascii='#VALUE#'"; 
-	public List<ParteDeVorbire> getConjunction(String text)
+	public List<PartOfSpeech> getConjunction(String text)
 	{
 		ResultSet resultSet = driver.runQuery(CONJUNCTIONS_QUERY.replace(TAG_VALUE, text));
 		
-		List<ParteDeVorbire> conjunctions = new ArrayList<ParteDeVorbire>();
+		List<PartOfSpeech> conjunctions = new ArrayList<PartOfSpeech>();
 		if(resultSet != null ){
 			try{
 				while(resultSet.next()){
 					String conjunctionTxt = resultSet.getString("conjunction");
-					ParteDeVorbire conjunction = null;
+					PartOfSpeech conjunction = null;
 					for(int i = 0; i < conjunctions.size() && conjunction == null;i++){
 						if(conjunctionTxt.equals(conjunctions.get(i).m_value)){
 							conjunction = conjunctions.get(i);
@@ -301,7 +303,7 @@ public class DictionaryDatabase
 					}
 					
 					if(conjunction == null){
-						conjunction = new ParteDeVorbire(Type.Conjunction);
+						conjunction = new PartOfSpeech(Type.Conjunction);
 						conjunction.set(conjunctionTxt);
 						conjunctions.add(conjunction);
 					}
@@ -314,6 +316,45 @@ public class DictionaryDatabase
 		return conjunctions;
 	}
 	
+	
+	final static String ARTICLE_QUERY = "select * from articles where article= '#VALUE#' or article_ascii= '#VALUE#'"; 
+	public List<Article> getArticle(String text)
+	{
+		ResultSet resultSet = driver.runQuery(ARTICLE_QUERY.replace(TAG_VALUE, text));
+		
+		List<Article> articles = new ArrayList<Article>();
+		if(resultSet != null ){
+			try{
+				while(resultSet.next()){
+					String artTxt = resultSet.getString("article");
+					
+					Article article = null;
+					for(int i = 0; i < articles.size() && article == null;i++){
+						if(artTxt.equals(articles.get(i).m_value)){
+							article = articles.get(i);
+						}
+					}
+					
+					if(article == null){
+						article = new Article();
+						article.set(artTxt);
+						
+						//String declination = resultSet.getString("declination");
+						article.setNumber(Number.values()[resultSet.getInt("number")]);
+						article.setGender(Gender.values()[resultSet.getInt("gender")]);
+						//pronoun.setCase(Case.values()[resultSet.getInt("case")]);
+						
+						articles.add(article);
+					}
+				}
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+			driver.dropResults();
+		}
+		return articles;
+	}
+	
 	public void databaseClose()
 	{
 		driver.closeDatabaseConnection();
@@ -322,6 +363,11 @@ public class DictionaryDatabase
 	public Word getWord(String word){
 		Word w = new Word();
 		w.set(word);
+		
+		List<Article> articles = getArticle(word);
+		for(int i = 0; i < articles.size();i++){
+			w.addPossibleFunction(articles.get(i));
+		}
 		
 		List<Substantive> substantives = getSubstantive(word);
 		for(int i = 0; i < substantives.size();i++){
@@ -335,7 +381,7 @@ public class DictionaryDatabase
 		for(int i = 0; i < adjectives.size();i++){
 			w.addPossibleFunction(adjectives.get(i));
 		}
-		List<ParteDeVorbire> adverbs = getAdverb(word);
+		List<PartOfSpeech> adverbs = getAdverb(word);
 		for(int i = 0; i < adverbs.size();i++){
 			w.addPossibleFunction(adverbs.get(i));
 		}
@@ -343,15 +389,15 @@ public class DictionaryDatabase
 		for(int i = 0; i < pronouns.size();i++){
 			w.addPossibleFunction(pronouns.get(i));
 		}
-		List<ParteDeVorbire> prepositions = getPreposition(word);
+		List<PartOfSpeech> prepositions = getPreposition(word);
 		for(int i = 0; i < prepositions.size();i++){
 			w.addPossibleFunction(prepositions.get(i));
 		}
-		List<ParteDeVorbire> numerals = getNumeral(word);
+		List<PartOfSpeech> numerals = getNumeral(word);
 		for(int i = 0; i < numerals.size();i++){
 			w.addPossibleFunction(numerals.get(i));
 		}
-		List<ParteDeVorbire> conjunctions = getConjunction(word);
+		List<PartOfSpeech> conjunctions = getConjunction(word);
 		for(int i = 0; i < conjunctions.size();i++){
 			w.addPossibleFunction(conjunctions.get(i));
 		}

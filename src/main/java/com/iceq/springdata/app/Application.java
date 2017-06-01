@@ -2,7 +2,7 @@ package com.iceq.springdata.app;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.iceq.springdata.controller.TestService;
+import com.iceq.test.services.FitkinTestService;
 
 /**
  * Runnable Test class.
@@ -14,11 +14,11 @@ import com.iceq.springdata.controller.TestService;
  */
 public class Application {
 	
-	public static void main(final String[] args) {
+	public static void main(final String[] args) throws Exception {
 
 		//final AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppContext.class);
 		final ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		final TestService controller = ctx.getBean(TestService.class);
+		final FitkinTestService controller = ctx.getBean(FitkinTestService.class);//TestService.class);
 		controller.runTest();
 		//controller.listCustomers();
 		//controller.listCategories();

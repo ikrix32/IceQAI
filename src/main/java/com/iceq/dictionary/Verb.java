@@ -5,7 +5,7 @@ import com.iceq.dictionary.Grammar.Person;
 import com.iceq.dictionary.Grammar.Tense;
 import com.iceq.dictionary.Grammar.Number;;
 
-public class Verb extends ParteDeVorbire
+public class Verb extends PartOfSpeech
 {
 	public class Conjugation extends StringN
 	{

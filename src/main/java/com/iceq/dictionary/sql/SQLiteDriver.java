@@ -19,6 +19,7 @@ public class SQLiteDriver
 		{
 			connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
 			connection.setAutoCommit(autoCommit);
+			statement = connection.createStatement();
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
@@ -61,7 +62,6 @@ public class SQLiteDriver
 	{
 		try
 		{
-			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
 
 			return resultSet;
@@ -99,14 +99,14 @@ public class SQLiteDriver
 			if (resultSet != null)
 				resultSet.close();
 
-			if (statement != null)
-				statement.close();
+//			if (statement != null)
+//				statement.close();
 		} catch (Exception e)
 		{
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
 		resultSet = null;
-		statement = null;
+		//statement = null;
 	}
 }
